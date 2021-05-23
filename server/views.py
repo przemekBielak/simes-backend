@@ -1,53 +1,37 @@
-from django.http import Http404
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework import mixins
 
 from server.models import Sensor
 from server.serializers import SensorSerializer
 
 
-class SensorList(APIView):
+class SensorList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     """
     List all sensor data, or create a new sensor.
     """
-    def get(self, request, format=None):
-        sensors = Sensor.objects.all()
-        serializer = SensorSerializer(sensors, many=True)
-        return Response(serializer.data)
+    queryset = Sensor.objects.all()
+    serializer_class = SensorSerializer
 
-    def post(self, request, format=None):
-        serializer = SensorSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
-class SensorDetails(APIView):
+class SensorDetails(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin,
+                    generics.GenericAPIView):
     """
     Retrieve, update or delete a sensor data.
     """
-    def get_object(self, pk):
-        try:
-            return Sensor.objects.get(pk=pk)
-        except Sensor.DoesNotExist:
-            raise Http404
+    queryset = Sensor.objects.all()
+    serializer_class = SensorSerializer
 
-    def get(self, request, pk, format=None):
-        sensor = self.get_object(pk)
-        serializer = SensorSerializer(sensor)
-        return Response(serializer.data)
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
-    def put(self, request, pk, format=None):
-        sensor = self.get_object(pk)
-        serializer = SensorSerializer(sensor, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
 
-    def delete(self, request, pk, format=None):
-        sensor = self.get_object(pk)
-        sensor.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
