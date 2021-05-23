@@ -1,2 +1,6 @@
 /venv
 /db.sqlite3
+/server/migrations
+/server/__pycache__
+/simes/migrations
+/simes/__pycache__
