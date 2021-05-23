@@ -1,21 +1,22 @@
+from django.http import Http404
 from rest_framework import status
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from server.models import Sensor
 from server.serializers import SensorSerializer
 
 
-@api_view(['GET', 'POST'])
-def sensor_list(request, format=None):
+class SensorList(APIView):
     """
     List all sensor data, or create a new sensor.
     """
-    if request.method == 'GET':
+    def get(self, request, format=None):
         sensors = Sensor.objects.all()
         serializer = SensorSerializer(sensors, many=True)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
+    def post(self, request, format=None):
         serializer = SensorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -23,27 +24,30 @@ def sensor_list(request, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def sensor_detail(request, pk, format=None):
+class SensorDetails(APIView):
     """
     Retrieve, update or delete a sensor data.
     """
-    try:
-        sensor = Sensor.objects.get(pk=pk)
-    except Sensor.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    def get_object(self, pk):
+        try:
+            return Sensor.objects.get(pk=pk)
+        except Sensor.DoesNotExist:
+            raise Http404
 
-    if request.method == 'GET':
+    def get(self, request, pk, format=None):
+        sensor = self.get_object(pk)
         serializer = SensorSerializer(sensor)
         return Response(serializer.data)
 
-    elif request.method == 'PUT':
+    def put(self, request, pk, format=None):
+        sensor = self.get_object(pk)
         serializer = SensorSerializer(sensor, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == 'DELETE':
+    def delete(self, request, pk, format=None):
+        sensor = self.get_object(pk)
         sensor.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
