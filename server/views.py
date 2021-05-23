@@ -1,51 +1,49 @@
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from server.models import Sensor
 from server.serializers import SensorSerializer
 
 
-@csrf_exempt
-def sensor_list(request):
+@api_view(['GET', 'POST'])
+def sensor_list(request, format=None):
     """
     List all sensor data, or create a new sensor.
     """
     if request.method == 'GET':
-        snippets = Sensor.objects.all()
-        serializer = SensorSerializer(snippets, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        sensors = Sensor.objects.all()
+        serializer = SensorSerializer(sensors, many=True)
+        return Response(serializer.data)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = SensorSerializer(data=data)
+        serializer = SensorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@csrf_exempt
-def sensor_detail(request, pk):
+@api_view(['GET', 'PUT', 'DELETE'])
+def sensor_detail(request, pk, format=None):
     """
     Retrieve, update or delete a sensor data.
     """
     try:
-        snippet = Sensor.objects.get(pk=pk)
+        sensor = Sensor.objects.get(pk=pk)
     except Sensor.DoesNotExist:
-        return HttpResponse(status=404)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = SensorSerializer(snippet)
-        return JsonResponse(serializer.data)
+        serializer = SensorSerializer(sensor)
+        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = SensorSerializer(snippet, data=data)
+        serializer = SensorSerializer(sensor, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        snippet.delete()
-        return HttpResponse(status=204)
+        sensor.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
