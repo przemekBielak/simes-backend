@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import generics
 from rest_framework import permissions
 from server.models import Sensor
+from server.permissions import IsOwnerOrReadOnly
 from server.serializers import SensorSerializer, UserSerializer
 
 
@@ -23,7 +24,7 @@ class SensorDetails(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 class UserList(generics.ListAPIView):

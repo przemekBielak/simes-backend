@@ -8,8 +8,8 @@ class SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
         owner = serializers.ReadOnlyField(source='owner.username')
-        fields = ['id', 'voltage', 'current', 'owner', 'time']
-        read_only_fields = ['time']
+        fields = ['id', 'voltage', 'current', 'time', 'owner']
+        read_only_fields = ['time', 'owner']
 
 
 class UserSerializer(serializers.ModelSerializer):
