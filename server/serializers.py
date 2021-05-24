@@ -4,16 +4,18 @@ from django.contrib.auth.models import User
 from server.models import Sensor
 
 
-class SensorSerializer(serializers.ModelSerializer):
+class SensorSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Sensor
-        owner = serializers.ReadOnlyField(source='owner.username')
-        fields = ['id', 'voltage', 'current', 'time', 'owner']
+        fields = ['url', 'id', 'voltage', 'current', 'time', 'owner']
         read_only_fields = ['time', 'owner']
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    sensor_data = serializers.HyperlinkedRelatedField(many=True, view_name='sensor-detail', read_only=True)
+
     class Meta:
         model = User
-        sensor_data = serializers.PrimaryKeyRelatedField(many=True, queryset=Sensor.objects.all())
-        fields = ['id', 'username', 'sensor_data']
+        fields = ['url', 'id', 'username', 'sensor_data']
