@@ -1,48 +1,28 @@
 from django.contrib.auth.models import User
-from rest_framework import generics
 from rest_framework import permissions
+from rest_framework import viewsets
+
 from server.models import Sensor
 from server.permissions import IsOwnerOrReadOnly
 from server.serializers import SensorSerializer, UserSerializer
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
-from rest_framework.decorators import api_view
 
 
-class SensorList(generics.ListCreateAPIView):
+class SensorViewSet(viewsets.ModelViewSet):
     """
-    List all sensor data, or create a new sensor.
-    """
-    queryset = Sensor.objects.all()
-    serializer_class = SensorSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
-
-class SensorDetails(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Retrieve, update or delete a sensor data.
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
     """
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
-class UserList(generics.ListAPIView):
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `retrieve` actions.
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'sensor_data': reverse('sensor-list', request=request, format=format)
-    })

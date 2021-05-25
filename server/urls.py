@@ -1,14 +1,11 @@
-from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
-
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from server import views
 
-urlpatterns = [
-    path('', views.api_root),
-    path('sensors/', views.SensorList.as_view(), name='sensor-list'),
-    path('sensors/<int:pk>/', views.SensorDetails.as_view(), name='sensor-detail'),
-    path('users/', views.UserList.as_view(), name='user-list'),
-    path('users/<int:pk>/', views.UserDetail.as_view(), name='user-detail')
-]
+router = DefaultRouter()
+router.register(r'sensors', views.SensorViewSet)
+router.register(r'users', views.UserViewSet)
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = [
+    path('', include(router.urls)),
+]
