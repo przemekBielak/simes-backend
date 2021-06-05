@@ -2,22 +2,28 @@ from django.contrib.auth.models import User
 from rest_framework import permissions
 from rest_framework import viewsets
 
-from server.models import Sensor
-from server.permissions import IsOwnerOrReadOnly
-from server.serializers import SensorSerializer, UserSerializer
+from server.models import Sensor1, Sensor2, Data
+from server.serializers import Sensor1Serializer, Sensor2Serializer, UserSerializer, DataSerializer
 
 
-class SensorViewSet(viewsets.ModelViewSet):
+class Sensor1ViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
     `update` and `destroy` actions.
     """
-    queryset = Sensor.objects.all()
-    serializer_class = SensorSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    queryset = Sensor1.objects.all()
+    serializer_class = Sensor1Serializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+
+class Sensor2ViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
+    """
+    queryset = Sensor2.objects.all()
+    serializer_class = Sensor2Serializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -26,3 +32,9 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class DataViewSet(viewsets.ModelViewSet):
+    queryset = Data.objects.all()
+    serializer_class = DataSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
