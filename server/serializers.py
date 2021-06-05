@@ -29,7 +29,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class DataSerializer(serializers.HyperlinkedModelSerializer):
     sensor1 = Sensor1Serializer()
-    sensor2 = Sensor1Serializer()
+    sensor2 = Sensor2Serializer()
 
     class Meta:
         model = Data

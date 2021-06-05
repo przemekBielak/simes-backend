@@ -6,7 +6,7 @@ from server.models import Sensor1, Sensor2, Data
 from server.serializers import Sensor1Serializer, Sensor2Serializer, UserSerializer, DataSerializer
 
 
-class Sensor1ViewSet(viewsets.ModelViewSet):
+class Sensor1ViewSet(viewsets.ReadOnlyModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
     `update` and `destroy` actions.
@@ -16,7 +16,7 @@ class Sensor1ViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class Sensor2ViewSet(viewsets.ModelViewSet):
+class Sensor2ViewSet(viewsets.ReadOnlyModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
     `update` and `destroy` actions.
