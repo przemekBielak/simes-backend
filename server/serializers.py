@@ -34,16 +34,14 @@ class DataSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Data
         fields = ['url', 'id', 'sensor1', 'sensor2']
-    #
-    # def create(self, validated_data):
-    #     sensor1_data = validated_data.pop('sensor1')
-    #     sensor2_data = validated_data.pop('sensor2')
-    # 
-    #     data = Data.objects.create(**validated_data)
-    #
-    #     Sensor1.objects.create()
-    #
-    #     # instance = Sensor1.objects.create(**validated_data['sensor1'])
-    #     # instance2 = Sensor2.objects.create(**validated_data['sensor2'])
-    #     print(validated_data)
-    #     return Data(**validated_data)
+
+    def create(self, validated_data):
+        sensor1_data = validated_data.pop('sensor1')
+        sensor2_data = validated_data.pop('sensor2')
+
+        created1 = Sensor1.objects.create(**sensor1_data)
+        created2 = Sensor2.objects.create(**sensor2_data)
+
+        data = Data.objects.create(sensor1=created1, sensor2=created2, **validated_data)
+
+        return data
