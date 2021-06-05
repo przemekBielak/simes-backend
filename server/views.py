@@ -7,29 +7,18 @@ from server.serializers import Sensor1Serializer, Sensor2Serializer, UserSeriali
 
 
 class Sensor1ViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
-    """
     queryset = Sensor1.objects.all()
     serializer_class = Sensor1Serializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class Sensor2ViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
-    """
     queryset = Sensor2.objects.all()
     serializer_class = Sensor2Serializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list` and `retrieve` actions.
-    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
 

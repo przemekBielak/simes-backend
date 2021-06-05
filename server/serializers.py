@@ -1,24 +1,25 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from rest_framework.relations import PrimaryKeyRelatedField
 
 from server.models import Sensor1, Sensor2, Data
 
 
-class Sensor1Serializer(serializers.HyperlinkedModelSerializer):
+class BaseSensorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
+        abstract = True
+        fields = ['url', 'id', 'voltage', 'current', 'power', 'energy', 'charge_cycles', 'temperature', 'status',
+                  'error', 'time']
+        read_only_fields = ['time']
+
+
+class Sensor1Serializer(BaseSensorSerializer):
+    class Meta(BaseSensorSerializer.Meta):
         model = Sensor1
-        fields = ['url', 'id', 'voltage', 'current', 'power', 'energy', 'charge_cycles', 'temperature', 'status',
-                  'error', 'time']
-        read_only_fields = ['time']
 
 
-class Sensor2Serializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
+class Sensor2Serializer(BaseSensorSerializer):
+    class Meta(BaseSensorSerializer.Meta):
         model = Sensor2
-        fields = ['url', 'id', 'voltage', 'current', 'power', 'energy', 'charge_cycles', 'temperature', 'status',
-                  'error', 'time']
-        read_only_fields = ['time']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
