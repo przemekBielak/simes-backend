@@ -19,11 +19,17 @@ class Sensor2ViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Returns a list of all active users.
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class DataViewSet(viewsets.ModelViewSet):
+    """
+    Returns data from all sensors.
+    """
     queryset = Data.objects.all()
     serializer_class = DataSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
