@@ -32,7 +32,21 @@ Prerequisites:
 - docker-compose up
 
 # Run using Podman
-TBD
+Prerequisites:
+- Linux system with podman installed
+
+1) Build image
+- podman build -t simes .
+
+2) Run podman container
+- podman run -it -rm -d -p 8000:8000 -v ./:/code/:Z --name simes-app simes
+
+3) Attach to running container (manage server application)
+- podman exec -it app /bin/bash
+- python manage.py makemigrations server
+- python manage.py migrate
+- python manage.py createsuperuser
+
 
 # Using application
 - Application is running on http://127.0.0.1:8000/api/v1/
