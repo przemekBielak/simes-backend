@@ -1,0 +1,39 @@
+[
+  {
+    "model": "server.sensor1",
+    "pk": 31,
+    "fields": {
+      "created": "2021-07-25T13:34:15.949Z",
+      "voltage": 25.0,
+      "current": 25.0,
+      "power": 25.0,
+      "energy": 25.0,
+      "charge_cycles": 25.0,
+      "temperature": 25.0,
+      "status": 1,
+      "error": 1,
+      "time": "2021-07-25T13:34:15.949Z"
+    }
+  },
+  {
+    "model": "server.sensor2",
+    "pk": 31,
+    "fields": {
+      "created": "2021-07-25T13:35:42.666Z",
+      "voltage": 26.0,
+      "current": 26.0,
+      "power": 26.0,
+      "energy": 26.0,
+      "charge_cycles": 26.0,
+      "temperature": 26.0,
+      "status": 2,
+      "error": 2,
+      "time": "2021-07-25T13:35:42.665Z"
+    }
+  },
+  {
+    "model": "server.data",
+    "pk": 31,
+    "fields": { "sensor1": 31, "sensor2": 31 }
+  }
+]
