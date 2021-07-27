@@ -1,7 +1,7 @@
 [
   {
     "model": "server.sensor1",
-    "pk": 31,
+    "pk": 32,
     "fields": {
       "created": "2021-07-25T13:34:15.949Z",
       "voltage": 25.0,
@@ -17,7 +17,7 @@
   },
   {
     "model": "server.sensor2",
-    "pk": 31,
+    "pk": 32,
     "fields": {
       "created": "2021-07-25T13:35:42.666Z",
       "voltage": 26.0,
@@ -33,7 +33,7 @@
   },
   {
     "model": "server.data",
-    "pk": 31,
-    "fields": { "sensor1": 31, "sensor2": 31 }
+    "pk": 32,
+    "fields": { "sensor1": 32, "sensor2": 32 }
   }
 ]
