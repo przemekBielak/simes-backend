@@ -1,7 +1,8 @@
 import csv
 import json
 
-with open('data.csv', 'r') as csv_file:
+# encoding to remove \ufeff at the beginning of csv file
+with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
     fieldnames = ("voltage","current","power","energy","charge_cycles", "temperature", "status", "error", "time")
     fieldnames1 = [s + "1" for s in fieldnames]
     fieldnames2 = [s + "2" for s in fieldnames]
@@ -11,20 +12,38 @@ with open('data.csv', 'r') as csv_file:
     pk_iter = 0
     data = []
     for row in csv_reader:
-        fieldnames1 = dict(filter(lambda x:x[0].endswith("1"), row.items()))
-        fieldnames2 = dict(filter(lambda x:x[0].endswith("2"), row.items()))
         data.append(
             {
                 "model" : "server.sensor1",
                 "pk": pk_iter,
-                "fields" : fieldnames1
+                "fields" : {
+                    "voltage" : float(row["voltage1"]),
+                    "current" : float(row["current1"]),
+                    "power" : float(row["power1"]),
+                    "energy" : float(row["energy1"]),
+                    "charge_cycles" : int(row["charge_cycles1"]),
+                    "temperature" : float(row["temperature1"]),
+                    "status" : 1,
+                    "error" : 0,
+                    "time" : row["time"].replace('"', '')
+                }
             },
         )
         data.append(
             {
                 "model" : "server.sensor2",
                 "pk": pk_iter,
-                "fields" : fieldnames2
+                "fields" : {
+                    "voltage" : float(row["voltage2"]),
+                    "current" : float(row["current2"]),
+                    "power" : float(row["power2"]),
+                    "energy" : float(row["energy2"]),
+                    "charge_cycles" : int(row["charge_cycles2"]),
+                    "temperature" : float(row["temperature2"]),
+                    "status" : 1,
+                    "error" : 0,
+                    "time" : row["time"].replace('"', '')
+                }
             },
         )
         pk_iter += 1
