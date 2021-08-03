@@ -8,7 +8,8 @@ class BaseSensorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         abstract = True
         fields = ['url', 'id', 'voltage', 'current',
-                  'power', 'temperature', 'energy', 'charge']
+                  'power', 'temperature', 'energy', 'charge', 'time']
+        read_only_fields = ['time']
 
 
 class Sensor1Serializer(BaseSensorSerializer):

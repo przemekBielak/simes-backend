@@ -10,6 +10,7 @@ class BaseSensor(models.Model):
     temperature = models.FloatField()
     energy = models.FloatField()
     charge = models.FloatField()
+    time = models.DateTimeField()
 
     class Meta:
         abstract = True

@@ -1,11 +1,14 @@
 import csv
 import json
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 # encoding to remove \ufeff at the beginning of csv file
 with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
     csv_reader = csv.DictReader(csv_file, delimiter=';')
     pk_iter = 0
     data = []
+    time = datetime.now(tz=timezone.utc)
 
     for row in csv_reader:
         data.append(
@@ -19,6 +22,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
                     "temperature": float(row["temperature1"]),
                     "energy": float(row["energy1"]),
                     "charge": float(row["charge1"]),
+                    "time": time.__str__()
                 }
             },
         )
@@ -33,6 +37,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
                     "temperature": float(row["temperature2"]),
                     "energy": float(row["energy2"]),
                     "charge": float(row["charge2"]),
+                    "time": time.__str__()
                 }
             },
         )
@@ -47,6 +52,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
                     "temperature": float(row["temperature3"]),
                     "energy": float(row["energy3"]),
                     "charge": float(row["charge3"]),
+                    "time": time.__str__()
                 }
             },
         )
@@ -61,10 +67,12 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
                     "temperature": float(row["temperature4"]),
                     "energy": float(row["energy4"]),
                     "charge": float(row["charge4"]),
+                    "time": time.__str__()
                 }
             },
         )
         pk_iter += 1
+        time += timedelta(seconds=5)
 
     for i in range(pk_iter):
         data.append(
