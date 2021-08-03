@@ -60,6 +60,6 @@ class DataSerializer(serializers.HyperlinkedModelSerializer):
         created4 = Sensor4.objects.create(**sensor4_data)
 
         data = Data.objects.create(
-            sensor1=created1, sensor2=created2, ensor3=created3, sensor4=created4, **validated_data)
+            sensor1=created1, sensor2=created2, sensor3=created3, sensor4=created4, **validated_data)
 
         return data
