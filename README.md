@@ -19,7 +19,11 @@ Prerequisites:
 
 - python manage.py createsuperuser
 
-4. Run application
+4. Load example data - Can take a few minutes
+
+- python manage.py loaddata data.json
+
+5. Run application
 
 - python manage.py runserver
 
