@@ -1,65 +1,87 @@
 # Run on a host operating system
+
 Prerequisites:
+
 - Python 3
 
-1) Create python venv
+1. Create python venv
+
 - python3 -m venv ./venv
 - source venv/bin/activate
 - pip install -r requirements.txt
 
-2) Initialize database
+2. Initialize database
+
 - python manage.py makemigrations server
 - python manage.py migrate
 
-3) create super user
+3. create super user
+
 - python manage.py createsuperuser
 
-4) Run application
+4. Run application
+
 - python manage.py runserver
 
 # Run using Docker
+
 Prerequisites:
+
 - Docker, docker-compose
 
-2) Initialize database
+2. Initialize database
+
 - docker-compose run server python manage.py makemigrations server
 - docker-compose run server python manage.py migrate
 
-3) create super user
+3. create super user
+
 - docker-compose run server python manage.py createsuperuser
 
-4) Run application
+4. Load example data - Can take a few minutes
+
+- python manage.py loaddata data.json
+
+5. Run application
+
 - docker-compose up
 
 # Run using Podman
+
 Prerequisites:
+
 - Linux system with podman installed
 
-1) Build image
+1. Build image
+
 - podman build -t simes .
 
-2) Run podman container
+2. Run podman container
+
 - podman run -it -rm -d -p 8000:8000 -v ./:/code/:Z --name app simes
 
-3) Attach to running container (manage server application)
+3. Attach to running container (manage server application)
+
 - podman exec -it app /bin/bash
 - python manage.py makemigrations server
 - python manage.py migrate
 - python manage.py createsuperuser
 
-
 # Using application
+
 - Application is running on http://127.0.0.1:8000/api/v1/
 - Api can be explored using html view
 - To post data, you have to be logged in using super user details
 - requests support pagination of size 10
 
 ## Examples
+
 Examples use curl, but any tool/framework can be used for standard http requests
 
 - Post new sensors measurements (login credentials have to provided to post data) - http://127.0.0.1:8000/api/v1/data/:
+
 ```bash
-curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -u USER_NAME:USER_PASSWORD -d ' { 
+curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -u USER_NAME:USER_PASSWORD -d ' {
     "sensor1": {
         "voltage": 30,
         "current": 30,
@@ -84,11 +106,13 @@ curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -
 ```
 
 - Get data from all sensor measurements - http://127.0.0.1:8000/api/v1/data/:
+
 ```bash
 curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://127.0.0.1:8000/api/v1/data/
 ```
 
 Response:
+
 ```bash
 HTTP/1.1 200 OK
 Date: Sun, 06 Jun 2021 12:02:14 GMT
@@ -105,6 +129,7 @@ Referrer-Policy: same-origin
 ```
 
 - Get Sensor1 measurement 1 - http://127.0.0.1:8000/api/v1/sensor1/1/:
+
 ```bash
 curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://127.0.0.1:8000/api/v1/sensor1/1/
 ```
