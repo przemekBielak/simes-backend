@@ -1,4 +1,5 @@
 from django.urls import path, include
+from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 from server import views
 
@@ -12,4 +13,5 @@ router.register(r'data', views.DataViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('token', obtain_auth_token, name="auth_token")
 ]
