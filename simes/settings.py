@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-o*z^v$3+n)*z1!zt4sdmcf9%qf+v#k(6ooc36ur=d1eqz$1k55
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'simes.xyz', 'www.simes.xyz']
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 FIXTURE_DIRS = (
