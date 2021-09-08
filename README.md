@@ -62,7 +62,7 @@ Prerequisites:
 
 2. Run podman container
 
-- podman run -it -rm -d -p 8000:8000 -v ./:/code/:Z --name app simes
+- podman run -it -d -p 8000:8000 -v ./:/code/:Z --name app simes
 
 3. Attach to running container (manage server application)
 
