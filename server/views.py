@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 from server.models import Sensor1, Sensor2, Sensor3, Sensor4, Data
 from server.serializers import Sensor1Serializer, Sensor2Serializer, Sensor3Serializer, Sensor4Serializer, UserSerializer, DataSerializer
@@ -30,13 +30,13 @@ class Sensor4ViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (IsAuthenticated,)
 
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     """
     Returns a list of all active users.
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAdminUser,)
 
 
 class DataViewSet(viewsets.ModelViewSet):
