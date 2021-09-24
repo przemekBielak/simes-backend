@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
-from server.models import Sensor1, Sensor2, Sensor3, Sensor4, Data
-from server.serializers import Sensor1Serializer, Sensor2Serializer, Sensor3Serializer, Sensor4Serializer, UserSerializer, DataSerializer
+from server.models import Sensor1, Sensor2, Sensor3, Sensor4, Sensor5, Data
+from server.serializers import Sensor1Serializer, Sensor2Serializer, Sensor3Serializer, Sensor4Serializer, Sensor5Serializer, UserSerializer, DataSerializer
 
 
 class Sensor1ViewSet(viewsets.ReadOnlyModelViewSet):
@@ -27,6 +27,12 @@ class Sensor3ViewSet(viewsets.ReadOnlyModelViewSet):
 class Sensor4ViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Sensor4.objects.all()
     serializer_class = Sensor4Serializer
+    permission_classes = (IsAuthenticated,)
+
+
+class Sensor5ViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Sensor5.objects.all()
+    serializer_class = Sensor5Serializer
     permission_classes = (IsAuthenticated,)
 
 

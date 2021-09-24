@@ -5,7 +5,7 @@ from django.utils import timezone
 
 # encoding to remove \ufeff at the beginning of csv file
 with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
-    csv_reader = csv.DictReader(csv_file, delimiter=';')
+    csv_reader = csv.DictReader(csv_file, delimiter=',')
     pk_iter = 0
     data = []
     time = datetime.now(tz=timezone.utc)
@@ -71,6 +71,20 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
                 }
             },
         )
+        data.append(
+            {
+                "model": "server.sensor5",
+                "pk": pk_iter,
+                "fields": {
+                    "voltage": float(row["voltage5"]),
+                    "current": float(row["current5"]),
+                    "power": float(row["power5"]),
+                    "temperature": float(row["temperature5"]),
+                    "energy": float(row["energy5"]),
+                    "time": time.__str__()
+                }
+            },
+        )
         pk_iter += 1
         time += timedelta(seconds=5)
 
@@ -83,7 +97,8 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
                     "sensor1": i,
                     "sensor2": i,
                     "sensor3": i,
-                    "sensor4": i
+                    "sensor4": i,
+                    "sensor5": i
                 }
             }
         )

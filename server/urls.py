@@ -8,6 +8,7 @@ router.register(r'sensor1', views.Sensor1ViewSet)
 router.register(r'sensor2', views.Sensor2ViewSet)
 router.register(r'sensor3', views.Sensor3ViewSet)
 router.register(r'sensor4', views.Sensor4ViewSet)
+router.register(r'sensor5', views.Sensor5ViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'data', views.DataViewSet)
 

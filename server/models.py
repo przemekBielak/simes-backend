@@ -16,6 +16,18 @@ class BaseSensor(models.Model):
         abstract = True
 
 
+class BaseCurrentSensor(models.Model):
+    voltage = models.FloatField()
+    current = models.FloatField()
+    power = models.FloatField()
+    temperature = models.FloatField()
+    energy = models.FloatField()
+    time = models.DateTimeField()
+
+    class Meta:
+        abstract = True
+
+
 class Sensor1(BaseSensor):
     def save(self, *args, **kwargs):
         if self.time is None:
@@ -44,6 +56,13 @@ class Sensor4(BaseSensor):
         super(Sensor4, self).save(*args, **kwargs)
 
 
+class Sensor5(BaseCurrentSensor):
+    def save(self, *args, **kwargs):
+        if self.time is None:
+            self.time = datetime.now()
+        super(Sensor5, self).save(*args, **kwargs)
+
+
 class Data(models.Model):
     sensor1 = models.OneToOneField(
         Sensor1, related_name='sensor1_data', on_delete=models.CASCADE)
@@ -53,3 +72,5 @@ class Data(models.Model):
         Sensor3, related_name='sensor3_data', on_delete=models.CASCADE)
     sensor4 = models.OneToOneField(
         Sensor4, related_name='sensor4_data', on_delete=models.CASCADE)
+    sensor5 = models.OneToOneField(
+        Sensor5, related_name='sensor5_data', on_delete=models.CASCADE)
