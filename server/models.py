@@ -18,10 +18,10 @@ class BaseSensor(models.Model):
 
 class BaseCurrentSensor(models.Model):
     voltage = models.FloatField()
-    current = models.FloatField()
-    power = models.FloatField()
-    temperature = models.FloatField()
-    energy = models.FloatField()
+    sPower = models.FloatField()
+    pPower = models.FloatField()
+    qPower = models.FloatField()
+    pFactor = models.FloatField()
     time = models.DateTimeField()
 
     class Meta:
