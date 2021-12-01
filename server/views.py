@@ -2,37 +2,43 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
-from server.models import Sensor1, Sensor2, Sensor3, Sensor4, Sensor5, Data
-from server.serializers import Sensor1Serializer, Sensor2Serializer, Sensor3Serializer, Sensor4Serializer, Sensor5Serializer, UserSerializer, DataSerializer
+from server.models import AcDcSensor, DcSensor1, DcSensor2Pv, DcSensor3LiIon, DcSensor4Scap, DcSensor5Charger, Data
+from server.serializers import AcDcSensorSerializer, DcSensor1Serializer, DcSensor2PvSerializer, DcSensor3LiIonSerializer, DcSensor4ScapSerializer, DcSensor5ChargerSerializer, UserSerializer, DataSerializer
 
 
-class Sensor1ViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Sensor1.objects.all()
-    serializer_class = Sensor1Serializer
+class AcDcSensorViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = AcDcSensor.objects.all()
+    serializer_class = AcDcSensorSerializer
     permission_classes = (IsAuthenticated,)
 
 
-class Sensor2ViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Sensor2.objects.all()
-    serializer_class = Sensor2Serializer
+class DcSensor1ViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = DcSensor1.objects.all()
+    serializer_class = DcSensor1Serializer
     permission_classes = (IsAuthenticated,)
 
 
-class Sensor3ViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Sensor3.objects.all()
-    serializer_class = Sensor3Serializer
+class DcSensor2PvViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = DcSensor2Pv.objects.all()
+    serializer_class = DcSensor2PvSerializer
     permission_classes = (IsAuthenticated,)
 
 
-class Sensor4ViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Sensor4.objects.all()
-    serializer_class = Sensor4Serializer
+class DcSensor3LiIonViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = DcSensor3LiIon.objects.all()
+    serializer_class = DcSensor3LiIonSerializer
     permission_classes = (IsAuthenticated,)
 
 
-class Sensor5ViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Sensor5.objects.all()
-    serializer_class = Sensor5Serializer
+class DcSensor4ScapViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = DcSensor4Scap.objects.all()
+    serializer_class = DcSensor4ScapSerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class DcSensor5ChargerViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = DcSensor5Charger.objects.all()
+    serializer_class = DcSensor5ChargerSerializer
     permission_classes = (IsAuthenticated,)
 
 

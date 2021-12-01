@@ -4,11 +4,12 @@ from rest_framework.routers import DefaultRouter
 from server import views
 
 router = DefaultRouter()
-router.register(r'sensor1', views.Sensor1ViewSet)
-router.register(r'sensor2', views.Sensor2ViewSet)
-router.register(r'sensor3', views.Sensor3ViewSet)
-router.register(r'sensor4', views.Sensor4ViewSet)
-router.register(r'sensor5', views.Sensor5ViewSet)
+router.register(r'acdc_sensor', views.AcDcSensorViewSet)
+router.register(r'dc_sensor1', views.DcSensor1ViewSet)
+router.register(r'dc_sensor2pv', views.DcSensor2PvViewSet)
+router.register(r'dc_sensor3liion', views.DcSensor3LiIonViewSet)
+router.register(r'dc_sensor4scap', views.DcSensor4ScapViewSet)
+router.register(r'dc_sensor5charger', views.DcSensor5ChargerViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'data', views.DataViewSet)
 

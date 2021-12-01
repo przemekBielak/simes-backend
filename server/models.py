@@ -3,74 +3,159 @@ from datetime import datetime
 from django.db import models
 
 
-class BaseSensor(models.Model):
-    voltage = models.FloatField()
-    current = models.FloatField()
-    power = models.FloatField()
-    temperature = models.FloatField()
-    energy = models.FloatField()
-    charge = models.FloatField()
-    time = models.DateTimeField()
-
-    class Meta:
-        abstract = True
-
-
-class BaseCurrentSensor(models.Model):
-    voltage = models.FloatField()
-    sPower = models.FloatField()
+class AcDcSensor:
+    voltage1Rms = models.FloatField()
+    voltage2Rms = models.FloatField()
+    voltage3Rms = models.FloatField()
+    current1Rms = models.FloatField()
+    current2Rms = models.FloatField()
+    current3Rms = models.FloatField()
     pPower = models.FloatField()
     qPower = models.FloatField()
-    pFactor = models.FloatField()
-    time = models.DateTimeField()
+    sPower = models.FloatField()
+    pEnergy = models.FloatField()
+    qEnergy = models.FloatField()
+    currentThd = models.FloatField()
+    voltageThd = models.FloatField()
+    powerCos = models.FloatField()
+    frequence = models.FloatField()
+    status = models.IntegerField()
 
-    class Meta:
-        abstract = True
-
-
-class Sensor1(BaseSensor):
     def save(self, *args, **kwargs):
         if self.time is None:
             self.time = datetime.now()
-        super(Sensor1, self).save(*args, **kwargs)
+        super(AcDcSensor, self).save(*args, **kwargs)
 
 
-class Sensor2(BaseSensor):
+class DcSensor1:
+    voltageCh1 = models.FloatField()
+    currentCh1 = models.FloatField()
+    powerDcCh1 = models.FloatField()
+    energyDcCh1 = models.FloatField()
+    statusCh1 = models.IntegerField()
+    temperatureCh1 = models.FloatField()
+
+    voltageCh2 = models.FloatField()
+    currentCh2 = models.FloatField()
+    powerDcCh2 = models.FloatField()
+    energyDcCh2 = models.FloatField()
+    statusCh2 = models.IntegerField()
+    temperatureCh2 = models.FloatField()
+
     def save(self, *args, **kwargs):
         if self.time is None:
             self.time = datetime.now()
-        super(Sensor2, self).save(*args, **kwargs)
+        super(DcSensor1, self).save(*args, **kwargs)
 
 
-class Sensor3(BaseSensor):
+class DcSensor2Pv:
+    voltageCh1 = models.FloatField()
+    currentCh1 = models.FloatField()
+    powerDcCh1 = models.FloatField()
+    energyDcCh1 = models.FloatField()
+    statusCh1 = models.IntegerField()
+    temperatureCh1 = models.FloatField()
+
+    voltageCh2 = models.FloatField()
+    currentCh2 = models.FloatField()
+    powerDcCh2 = models.FloatField()
+    energyDcCh2 = models.FloatField()
+    statusCh2 = models.IntegerField()
+    temperatureCh2 = models.FloatField()
+    lighting = models.FloatField()
+
     def save(self, *args, **kwargs):
         if self.time is None:
             self.time = datetime.now()
-        super(Sensor3, self).save(*args, **kwargs)
+        super(DcSensor2Pv, self).save(*args, **kwargs)
 
 
-class Sensor4(BaseSensor):
+class DcSensor3LiIon:
+    voltageCh1 = models.FloatField()
+    currentCh1 = models.FloatField()
+    powerDcCh1 = models.FloatField()
+    energyDcCh1 = models.FloatField()
+    statusCh1 = models.IntegerField()
+    temperatureCh1 = models.FloatField()
+    charge = models.FloatField()
+    cycles = models.IntegerField()
+
+    voltageCh2 = models.FloatField()
+    currentCh2 = models.FloatField()
+    powerDcCh2 = models.FloatField()
+    energyDcCh2 = models.FloatField()
+    statusSoh = models.IntegerField()
+    temperatureCh2 = models.FloatField()
+    soc = models.FloatField()
+    capacity = models.FloatField()
+
     def save(self, *args, **kwargs):
         if self.time is None:
             self.time = datetime.now()
-        super(Sensor4, self).save(*args, **kwargs)
+        super(DcSensor3LiIon, self).save(*args, **kwargs)
 
 
-class Sensor5(BaseCurrentSensor):
+class DcSensor4Scap:
+    voltageCh1 = models.FloatField()
+    currentCh1 = models.FloatField()
+    powerDcCh1 = models.FloatField()
+    energyDcCh1 = models.FloatField()
+    statusCh1 = models.IntegerField()
+    temperatureCh1 = models.FloatField()
+    charge = models.FloatField()
+    cycles = models.IntegerField()
+
+    voltageCh2 = models.FloatField()
+    currentCh2 = models.FloatField()
+    powerDcCh2 = models.FloatField()
+    energyDcCh2 = models.FloatField()
+    statusSoh = models.IntegerField()
+    temperatureCh2 = models.FloatField()
+    soc = models.FloatField()
+    capacity = models.FloatField()
+
     def save(self, *args, **kwargs):
         if self.time is None:
             self.time = datetime.now()
-        super(Sensor5, self).save(*args, **kwargs)
+        super(DcSensor4Scap, self).save(*args, **kwargs)
+
+
+class DcSensor5Charger:
+    voltageCh1 = models.FloatField()
+    currentCh1 = models.FloatField()
+    powerDcCh1 = models.FloatField()
+    energyDcCh1 = models.FloatField()
+    statusCh1 = models.IntegerField()
+    temperatureCh1 = models.FloatField()
+    charge = models.FloatField()
+
+    voltageCh2 = models.FloatField()
+    currentCh2 = models.FloatField()
+    powerDcCh2 = models.FloatField()
+    energyDcCh2 = models.FloatField()
+    status = models.IntegerField()
+    temperatureCh2 = models.FloatField()
+    soc = models.FloatField()
+    capacity = models.FloatField()
+
+    def save(self, *args, **kwargs):
+        if self.time is None:
+            self.time = datetime.now()
+        super(DcSensor5Charger, self).save(*args, **kwargs)
+
+
 
 
 class Data(models.Model):
-    sensor1 = models.OneToOneField(
-        Sensor1, related_name='sensor1_data', on_delete=models.CASCADE)
-    sensor2 = models.OneToOneField(
-        Sensor2, related_name='sensor2_data', on_delete=models.CASCADE)
-    sensor3 = models.OneToOneField(
-        Sensor3, related_name='sensor3_data', on_delete=models.CASCADE)
-    sensor4 = models.OneToOneField(
-        Sensor4, related_name='sensor4_data', on_delete=models.CASCADE)
-    sensor5 = models.OneToOneField(
-        Sensor5, related_name='sensor5_data', on_delete=models.CASCADE)
+    acdc_sensor = models.OneToOneField(
+        AcDcSensor, related_name='acdc_sensor_data', on_delete=models.CASCADE)
+    dc_sensor1 = models.OneToOneField(
+        DcSensor1, related_name='dc_sensor1_data', on_delete=models.CASCADE)
+    dc_sensor2pv = models.OneToOneField(
+        DcSensor2Pv, related_name='dc_sensor2pv_data', on_delete=models.CASCADE)
+    dc_sensor3liion = models.OneToOneField(
+        DcSensor3LiIon, related_name='dc_sensor3liion_data', on_delete=models.CASCADE)
+    dc_sensor4scap = models.OneToOneField(
+        DcSensor4Scap, related_name='dc_sensor4scap_data', on_delete=models.CASCADE)
+    dc_sensor5charger = models.OneToOneField(
+        DcSensor5Charger, related_name='dc_sensor5charger_data', on_delete=models.CASCADE)
