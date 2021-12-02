@@ -4,6 +4,7 @@ from django.db import models
 
 
 class AcDcSensor(models.Model):
+    time = models.DateTimeField()
     voltage1Rms = models.FloatField()
     voltage2Rms = models.FloatField()
     voltage3Rms = models.FloatField()
@@ -28,6 +29,7 @@ class AcDcSensor(models.Model):
 
 
 class DcSensor1(models.Model):
+    time = models.DateTimeField()
     voltageCh1 = models.FloatField()
     currentCh1 = models.FloatField()
     powerDcCh1 = models.FloatField()
@@ -50,6 +52,7 @@ class DcSensor1(models.Model):
 
 
 class DcSensor2Pv(models.Model):
+    time = models.DateTimeField()
     voltageCh1 = models.FloatField()
     currentCh1 = models.FloatField()
     powerDcCh1 = models.FloatField()
@@ -72,6 +75,7 @@ class DcSensor2Pv(models.Model):
 
 
 class DcSensor3LiIon(models.Model):
+    time = models.DateTimeField()
     voltageCh1 = models.FloatField()
     currentCh1 = models.FloatField()
     powerDcCh1 = models.FloatField()
@@ -97,6 +101,7 @@ class DcSensor3LiIon(models.Model):
 
 
 class DcSensor4Scap(models.Model):
+    time = models.DateTimeField()
     voltageCh1 = models.FloatField()
     currentCh1 = models.FloatField()
     powerDcCh1 = models.FloatField()
@@ -122,6 +127,7 @@ class DcSensor4Scap(models.Model):
 
 
 class DcSensor5Charger(models.Model):
+    time = models.DateTimeField()
     voltageCh1 = models.FloatField()
     currentCh1 = models.FloatField()
     powerDcCh1 = models.FloatField()
