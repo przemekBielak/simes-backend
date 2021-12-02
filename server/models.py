@@ -3,7 +3,7 @@ from datetime import datetime
 from django.db import models
 
 
-class AcDcSensor:
+class AcDcSensor(models.Model):
     voltage1Rms = models.FloatField()
     voltage2Rms = models.FloatField()
     voltage3Rms = models.FloatField()
@@ -27,7 +27,7 @@ class AcDcSensor:
         super(AcDcSensor, self).save(*args, **kwargs)
 
 
-class DcSensor1:
+class DcSensor1(models.Model):
     voltageCh1 = models.FloatField()
     currentCh1 = models.FloatField()
     powerDcCh1 = models.FloatField()
@@ -48,7 +48,8 @@ class DcSensor1:
         super(DcSensor1, self).save(*args, **kwargs)
 
 
-class DcSensor2Pv:
+
+class DcSensor2Pv(models.Model):
     voltageCh1 = models.FloatField()
     currentCh1 = models.FloatField()
     powerDcCh1 = models.FloatField()
@@ -70,7 +71,7 @@ class DcSensor2Pv:
         super(DcSensor2Pv, self).save(*args, **kwargs)
 
 
-class DcSensor3LiIon:
+class DcSensor3LiIon(models.Model):
     voltageCh1 = models.FloatField()
     currentCh1 = models.FloatField()
     powerDcCh1 = models.FloatField()
@@ -95,7 +96,7 @@ class DcSensor3LiIon:
         super(DcSensor3LiIon, self).save(*args, **kwargs)
 
 
-class DcSensor4Scap:
+class DcSensor4Scap(models.Model):
     voltageCh1 = models.FloatField()
     currentCh1 = models.FloatField()
     powerDcCh1 = models.FloatField()
@@ -120,7 +121,7 @@ class DcSensor4Scap:
         super(DcSensor4Scap, self).save(*args, **kwargs)
 
 
-class DcSensor5Charger:
+class DcSensor5Charger(models.Model):
     voltageCh1 = models.FloatField()
     currentCh1 = models.FloatField()
     powerDcCh1 = models.FloatField()
@@ -142,8 +143,6 @@ class DcSensor5Charger:
         if self.time is None:
             self.time = datetime.now()
         super(DcSensor5Charger, self).save(*args, **kwargs)
-
-
 
 
 class Data(models.Model):
