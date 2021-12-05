@@ -13,7 +13,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
     for row in csv_reader:
         data.append(
             {
-                "model": "server.acdc_sensor",
+                "model": "server.acdcsensor",
                 "pk": pk_iter,
                 "fields": {
                     "time": time.__str__(),
@@ -38,7 +38,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
         )
         data.append(
             {
-                "model": "server.dc_sensor1",
+                "model": "server.dcsensor1",
                 "pk": pk_iter,
                 "fields": {
                     "time": time.__str__(),
@@ -60,7 +60,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
         )
         data.append(
             {
-                "model": "server.dc_sensor2pv",
+                "model": "server.dcsensor2pv",
                 "pk": pk_iter,
                 "fields": {
                     "time": time.__str__(),
@@ -73,6 +73,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
                     "voltageCh2": float(row["dc2_voltageCh2"]),
                     "currentCh2": float(row["dc2_currentCh2"]),
                     "powerDcCh2": float(row["dc2_powerDcCh2"]),
+                    "energyDcCh2": float(row["dc2_energyDcCh2"]),
                     "statusCh2": 0,
                     "temperatureCh2": 0,
                     "lighting": float(row["dc2_lighting"]),
@@ -81,7 +82,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
         )
         data.append(
             {
-                "model": "server.dc_sensor3liion",
+                "model": "server.dcsensor3liion",
                 "pk": pk_iter,
                 "fields": {
                     "time": time.__str__(),
@@ -106,7 +107,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
         )
         data.append(
             {
-                "model": "server.dc_sensor4scap",
+                "model": "server.dcsensor4scap",
                 "pk": pk_iter,
                 "fields": {
                     "time": time.__str__(),
@@ -132,7 +133,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
         )
         data.append(
             {
-                "model": "server.dc_sensor5charger",
+                "model": "server.dcsensor5charger",
                 "pk": pk_iter,
                 "fields": {
                     "time": time.__str__(),
@@ -150,7 +151,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
                     "status": 0,
                     "temperatureCh2": 0,
                     "soc": float(row["dc5_soc"]),
-                    "capacity": float(row["dc5_energy"])
+                    "energy": float(row["dc5_energy"])
                 }
             },
         )
