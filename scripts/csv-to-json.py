@@ -30,7 +30,7 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
                     "qEnergy": float(row["acdc_qEnergy"]),
                     "currentThd": 0,
                     "voltageThd": 0,
-                    "powerCos": float(row["acdc_qacdc_powerCosEnergy"]),
+                    "powerCos": float(row["acdc_powerCos"]),
                     "frequence": float(row["acdc_frequence"]),
                     "status": 0
                 }
