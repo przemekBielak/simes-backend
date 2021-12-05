@@ -13,75 +13,144 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
     for row in csv_reader:
         data.append(
             {
-                "model": "server.sensor1",
+                "model": "server.acdc_sensor",
                 "pk": pk_iter,
                 "fields": {
-                    "voltage": float(row["voltage1"]),
-                    "current": float(row["current1"]),
-                    "power": float(row["power1"]),
-                    "temperature": float(row["temperature1"]),
-                    "energy": float(row["energy1"]),
-                    "charge": float(row["charge1"]),
-                    "time": time.__str__()
+                    "time": time.__str__(),
+                    "voltage1Rms": float(row["acdc_voltage1Rms"]),
+                    "voltage2Rms": float(row["acdc_voltage2Rms"]),
+                    "voltage3Rms": float(row["acdc_voltage3Rms"]),
+                    "current1Rms": float(row["acdc_current1Rms"]),
+                    "current2Rms": float(row["acdc_current2Rms"]),
+                    "current3Rms": float(row["acdc_current3Rms"]),
+                    "pPower": float(row["acdc_pPower"]),
+                    "qPower": float(row["acdc_qPower"]),
+                    "sPower": float(row["acdc_sPower"]),
+                    "pEnergy": float(row["acdc_pEnergy"]),
+                    "qEnergy": float(row["acdc_qEnergy"]),
+                    "currentThd": 0,
+                    "voltageThd": 0,
+                    "powerCos": float(row["acdc_qacdc_powerCosEnergy"]),
+                    "frequence": float(row["acdc_frequence"]),
+                    "status": 0
                 }
             },
         )
         data.append(
             {
-                "model": "server.sensor2",
+                "model": "server.dc_sensor1",
                 "pk": pk_iter,
                 "fields": {
-                    "voltage": float(row["voltage2"]),
-                    "current": float(row["current2"]),
-                    "power": float(row["power2"]),
-                    "temperature": float(row["temperature2"]),
-                    "energy": float(row["energy2"]),
-                    "charge": float(row["charge2"]),
-                    "time": time.__str__()
+                    "time": time.__str__(),
+                    "voltageCh1": float(row["dc1_voltageCh1"]),
+                    "currentCh1": float(row["dc1_currentCh1"]),
+                    "powerDcCh1": float(row["dc1_powerDcCh1"]),
+                    "energyDcCh1": float(row["dc1_energyDcCh1"]),
+                    "statusCh1": 0,
+                    "temperatureCh1": 0,
+                    "voltageCh2": 0,
+                    "currentCh2": 0,
+                    "powerDcCh2": 0,
+                    "energyDcCh2": 0,
+                    "statusCh2": 0,
+                    "temperatureCh2": 0,
+                    
                 }
             },
         )
         data.append(
             {
-                "model": "server.sensor3",
+                "model": "server.dc_sensor2pv",
                 "pk": pk_iter,
                 "fields": {
-                    "voltage": float(row["voltage3"]),
-                    "current": float(row["current3"]),
-                    "power": float(row["power3"]),
-                    "temperature": float(row["temperature3"]),
-                    "energy": float(row["energy3"]),
-                    "charge": float(row["charge3"]),
-                    "time": time.__str__()
+                    "time": time.__str__(),
+                    "voltageCh1": float(row["dc2_voltageCh1"]),
+                    "currentCh1": float(row["dc2_currentCh1"]),
+                    "powerDcCh1": float(row["dc2_powerDcCh1"]),
+                    "energyDcCh1": float(row["dc2_energyDcCh1"]),
+                    "statusCh1": 0,
+                    "temperatureCh1": 0,
+                    "voltageCh2": float(row["dc2_voltageCh2"]),
+                    "currentCh2": float(row["dc2_currentCh2"]),
+                    "powerDcCh2": float(row["dc2_powerDcCh2"]),
+                    "statusCh2": 0,
+                    "temperatureCh2": 0,
+                    "lighting": float(row["dc2_lighting"]),
                 }
             },
         )
         data.append(
             {
-                "model": "server.sensor4",
+                "model": "server.dc_sensor3liion",
                 "pk": pk_iter,
                 "fields": {
-                    "voltage": float(row["voltage4"]),
-                    "current": float(row["current4"]),
-                    "power": float(row["power4"]),
-                    "temperature": float(row["temperature4"]),
-                    "energy": float(row["energy4"]),
-                    "charge": float(row["charge4"]),
-                    "time": time.__str__()
+                    "time": time.__str__(),
+                    "voltageCh1": float(row["dc3_voltageCh1"]),
+                    "currentCh1": float(row["dc3_currentCh1"]),
+                    "powerDcCh1": float(row["dc3_powerDcCh1"]),
+                    "energyDcCh1": float(row["dc3_energyDcCh1"]),
+                    "statusCh1": 0,
+                    "temperatureCh1": 0,
+                    "charge": 0,
+                    "cycles": 0,
+                    "voltageCh2": float(row["dc3_voltageCh2"]),
+                    "currentCh2": float(row["dc3_currentCh2"]),
+                    "powerDcCh2": float(row["dc3_powerDcCh2"]),
+                    "energyDcCh2": float(row["dc3_energyDcCh2"]),
+                    "statusSoh": 0,
+                    "temperatureCh2": 0,
+                    "soc": float(row["dc3_soc"]),
+                    "capacity": float(row["dc3_capacity"])
                 }
             },
         )
         data.append(
             {
-                "model": "server.sensor5",
+                "model": "server.dc_sensor4scap",
                 "pk": pk_iter,
                 "fields": {
-                    "voltage": float(row["voltage5"]),
-                    "current": float(row["current5"]),
-                    "power": float(row["power5"]),
-                    "temperature": float(row["temperature5"]),
-                    "energy": float(row["energy5"]),
-                    "time": time.__str__()
+                    "time": time.__str__(),
+                    "voltageCh1": float(row["dc4_voltageCh1"]),
+                    "currentCh1": float(row["dc4_currentCh1"]),
+                    "powerDcCh1": float(row["dc4_powerDcCh1"]),
+                    "energyDcCh1": float(row["dc4_energyDcCh1"]),
+                    "statusCh1": 0,
+                    "temperatureCh1": 0,
+                    "charge": 0,
+                    "cycles": 0,
+                    "voltageCh2": float(row["dc4_voltageCh2"]),
+                    "currentCh2": float(row["dc4_currentCh2"]),
+                    "powerDcCh2": float(row["dc4_powerDcCh2"]),
+                    "energyDcCh2": float(row["dc4_energyDcCh2"]),
+                    "statusSoh": 0,
+                    "temperatureCh2": 0,
+                    "soc": float(row["dc4_soc"]),
+                    "capacity": float(row["dc4_capacity"])
+                    
+                }
+            },
+        )
+        data.append(
+            {
+                "model": "server.dc_sensor5charger",
+                "pk": pk_iter,
+                "fields": {
+                    "time": time.__str__(),
+                    "voltageCh1": float(row["dc5_voltageCh1"]),
+                    "currentCh1": float(row["dc5_currentCh1"]),
+                    "powerDcCh1": float(row["dc5_powerDcCh1"]),
+                    "energyDcCh1": float(row["dc5_energyDcCh1"]),
+                    "statusCh1": 0,
+                    "temperatureCh1": 0,
+                    "charge": 0,
+                    "voltageCh2": float(row["dc5_voltageCh2"]),
+                    "currentCh2": float(row["dc5_currentCh2"]),
+                    "powerDcCh2": float(row["dc5_powerDcCh2"]),
+                    "energyDcCh2": float(row["dc5_energyDcCh2"]),
+                    "status": 0,
+                    "temperatureCh2": 0,
+                    "soc": float(row["dc5_soc"]),
+                    "capacity": float(row["dc5_energy"])
                 }
             },
         )
@@ -94,11 +163,12 @@ with open('data.csv', 'r',  encoding='utf-8-sig') as csv_file:
                 "model": "server.data",
                 "pk": i,
                 "fields": {
-                    "sensor1": i,
-                    "sensor2": i,
-                    "sensor3": i,
-                    "sensor4": i,
-                    "sensor5": i
+                    "acdc_sensor": i,
+                    "dc_sensor1": i,
+                    "dc_sensor2pv": i,
+                    "dc_sensor3liion": i,
+                    "dc_sensor4scap": i,
+                    "dc_sensor5charger": i,
                 }
             }
         )

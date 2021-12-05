@@ -143,7 +143,7 @@ class DcSensor5Charger(models.Model):
     status = models.IntegerField()
     temperatureCh2 = models.FloatField()
     soc = models.FloatField()
-    capacity = models.FloatField()
+    energy = models.FloatField()
 
     def save(self, *args, **kwargs):
         if self.time is None:

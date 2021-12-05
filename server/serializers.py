@@ -68,7 +68,7 @@ class DcSensor5ChargerSerializer(BaseSensorSerializer):
                   'powerDcCh1', 'energyDcCh1', 'statusCh1',
                   'temperatureCh1', 'charge', 'voltageCh2', 'currentCh2',
                   'powerDcCh2', 'energyDcCh2', 'status',
-                  'temperatureCh2', 'soc', 'capacity', 'time']
+                  'temperatureCh2', 'soc', 'energy', 'time']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
